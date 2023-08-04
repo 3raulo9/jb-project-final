@@ -1,0 +1,29 @@
+/* ProductScreen.css */
+
+/* ... (other provided styles) */
+
+.quantity-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .quantity-button:hover {
+    background-color: #ccc;
+  }
+  
+  .next-icon {
+    font-size: 16px;
+    color: #3a3e4a;
+  }
+  
+  /* ... (other provided styles) */
+  

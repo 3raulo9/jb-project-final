@@ -1,0 +1,26 @@
+main{
+    min-height: 80vh;
+}
+.rating span{
+    margin:00.1rem;
+}
+
+h3{
+    padding:1rem 0;
+}
+
+h1{
+ font-size: 1.8rem;
+ padding:1rem 0;   
+}
+
+h2{
+    font-size: 1.4rem;
+    padding:0.5rem 0;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+    outline: 0;
+  }
