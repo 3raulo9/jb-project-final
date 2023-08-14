@@ -7,15 +7,17 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import { logout } from '../actions/userActions';
+import { USER_LOGOUT } from '../constants/userConstants';
 
 function Header() {
 
+  
   const userLogin = useSelector(state => state.userLogin)
   const {userInfo} = userLogin
   const dispatch = useDispatch()
   const logoutHandler = () =>{
     console.log('logout')
-    dispatch(logout())
+    dispatch({type: USER_LOGOUT})
   }
   return (
     <header>
