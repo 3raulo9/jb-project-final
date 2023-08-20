@@ -4,8 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { getUserDetails } from '../actions/userActions';
-
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 function ProfileScreen() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -24,14 +24,17 @@ function ProfileScreen() {
     
     const userLogin = useSelector(state => state.userLogin);
     const { userInfo } = userLogin;
+
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+    const { success } = userUpdateProfile
     useEffect(() => {
         if (!userInfo) {
             navigate('/login')
         } else {
             if (!user || !user.name
-                //  || success || userInfo._id !== user._id
+                 || success || userInfo._id !== user._id
                  ) {
-                // dispatch({ type: USER_UPDATE_PROFILE_RESET })
+                dispatch({ type: USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
                 // dispatch(listMyOrders())
             } else {
@@ -39,18 +42,24 @@ function ProfileScreen() {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, navigate, userInfo, user
-        // ,success
+    }, [dispatch, navigate, userInfo, user,success
         ])
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            setMessage('Passwords do not match');
+            setMessage('Passwords do not match')
         } else {
-            console.log('updating')
+            dispatch(updateUserProfile({
+                id: user._id,
+                name,
+                email,
+                password
+            }))
+            setMessage('')
         }
+
     };
   return (
     <Row>
@@ -66,7 +75,7 @@ function ProfileScreen() {
                 <Form.Group controlId='name'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
-                        required
+                    
                         type='name'
                         placeholder='Enter name'
                         value={name}
@@ -76,7 +85,6 @@ function ProfileScreen() {
                 <Form.Group controlId='email'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
-                        required
                         type='email'
                         placeholder='Enter Email'
                         value={email}
@@ -86,7 +94,6 @@ function ProfileScreen() {
                 <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
-                        required
                         type='password'
                         placeholder='Enter Password'
                         value={password}
