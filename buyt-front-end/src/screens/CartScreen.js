@@ -29,7 +29,7 @@ function CartScreen() {
   };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect');
+    navigate('/shipping');
   };
 
   // Calculate the total quantity of items in the cart
