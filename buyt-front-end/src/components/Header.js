@@ -9,16 +9,16 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import { logout } from '../actions/userActions';
 import { USER_LOGOUT } from '../constants/userConstants';
 
-function Header() {
 
-  
-  const userLogin = useSelector(state => state.userLogin)
-  const {userInfo} = userLogin
-  const dispatch = useDispatch()
-  const logoutHandler = () =>{
-    console.log('logout')
-    dispatch({type: USER_LOGOUT})
-  }
+function Header() {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const dispatch = useDispatch();
+
+  const logoutHandler = () => {
+      dispatch(logout()); // Use the logout action creator
+  };
+
   return (
     <header>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>

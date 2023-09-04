@@ -22,7 +22,7 @@ import {
     
 } from '../constants/userConstants';
 
-export const login = (email,password) => async (dispatch) =>{
+export const login = (email, password) => async (dispatch) => {
 
     try{
         dispatch({
@@ -59,11 +59,9 @@ export const login = (email,password) => async (dispatch) =>{
     }
 }
 
-export const logout = (dispatch) =>{
-    localStorage.removeItem('userInfo')
-    dispatch({type:USER_LOGOUT})
-    dispatch({type:USER_DETAILS_RESET})
-
+export const logout = () => (dispatch) => {
+    localStorage.removeItem('userInfo');
+    dispatch({ type: USER_LOGOUT });
 }
 
 
