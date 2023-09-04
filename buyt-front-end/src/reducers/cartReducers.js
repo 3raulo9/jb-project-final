@@ -5,7 +5,7 @@ import {
     CART_SAVE_PAYMENT_METHOD,
 
 
-} from '../constants/cartConstans';
+} from '../constants/cartConstants';
 
 
 export const cartReducer = (state={cartItems:[], shippingAddress: { } }, action) => {

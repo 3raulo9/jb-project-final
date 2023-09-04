@@ -9,7 +9,7 @@ import {
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL
-} from '../constants/productConstans';
+} from '../constants/productConstants';
 
 
 

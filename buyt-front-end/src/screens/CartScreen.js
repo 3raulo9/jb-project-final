@@ -66,21 +66,25 @@ function CartScreen() {
                   <Col md={3}>
                     <Form.Control
                       as="select"
-                      value={item.qty}
+                      value={item.qty.toString()} // Convert qty to a string
                       onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}
                     >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
+                      {item.countInStock > 0 &&
+                        [...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))
+                      }
+
                     </Form.Control>
                   </Col>
                   <Col md={1}>
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCartHandler(item.product)}>
+                      onClick={() => removeFromCartHandler(item.product)}
+                    >
                       <i className='fas fa-trash'></i>
                     </Button>
                   </Col>
@@ -103,12 +107,12 @@ function CartScreen() {
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              {cartItems.length === 0 ? (
-                <h2>Your cart is empty!</h2>
-              ) : (
+              {cartItems.length > 0 ? (
                 <h2 className="subtotal-text">Subtotal {totalQuantity} {itemText}</h2>
+              ) : (
+                <h2>Your cart is empty!</h2>
               )}
-              {cartItems.length > 0 && `$${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0).toFixed(2)}`}
+              {cartItems.length > 0 && `$${total.toFixed(2)}`}
             </ListGroup.Item>
           </ListGroup>
 
