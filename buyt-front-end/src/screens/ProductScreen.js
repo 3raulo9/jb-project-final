@@ -231,8 +231,8 @@ function ProductScreen() {
       ) : (
         <Row>
           <Col md={6}>
-            <Card className='my-3 p-3 rounded'>
-              <Image src={product?.image} alt={product?.name} fluid />
+            <Card className='my-3 p-3 rounded product-card'>
+              <Image src={product?.image} alt={product?.name} fluid className='product-image' />
             </Card>
           </Col>
 
@@ -253,7 +253,7 @@ function ProductScreen() {
           </Col>
 
           <Col md={3}>
-            <Card>
+            <Card className='product-details'>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
@@ -280,7 +280,7 @@ function ProductScreen() {
                           <div className='quantity-bubble'>
                             <button
                               type='button'
-                              className='quantity-button'
+                              className='quantity-button product-quantity-button'
                               onClick={decrementQty}
                             >
                               -
@@ -288,7 +288,7 @@ function ProductScreen() {
                             <span className='quantity-value'>{qty}</span>
                             <button
                               type='button'
-                              className='quantity-button'
+                              className='quantity-button product-quantity-button'
                               onClick={incrementQty}
                             >
                               +
@@ -320,4 +320,3 @@ function ProductScreen() {
 }
 
 export default ProductScreen;
-

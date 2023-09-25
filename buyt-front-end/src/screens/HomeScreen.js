@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import AdPlaceholder from '../components/AdPlaceholder'; // Import the AdPlaceholder component
+import AdPlaceholder from '../components/AdPlaceholder';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
@@ -14,9 +14,24 @@ function HomeScreen() {
   const productList = useSelector((state) => state.productList);
   const { error, loading, products } = productList;
 
+  // Use useEffect to fetch products when the component mounts
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
+
+  // Calculate the number of advertisements based on available screen height
+  const screenHeight = window.innerHeight;
+  const adHeight = 300; // Height of each advertisement
+  const numAds = Math.floor((screenHeight - 70) / (adHeight + 30)); // Consider bottom ad and spacing
+
+  // Helper function to generate multiple line breaks
+  const generateLineBreaks = (count) => {
+    const lineBreaks = [];
+    for (let i = 0; i < count; i++) {
+      lineBreaks.push(<br key={i} />);
+    }
+    return lineBreaks;
+  };
 
   return (
     <div>
@@ -27,22 +42,19 @@ function HomeScreen() {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
+          {/* Left-side advertisement */}
           <Col md={1}>
-            {/* Left-side advertisement */}
-            <br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
+            <br />
+            {[1,2,3].map((_, index) => (
+              <div key={index}>
+                <AdPlaceholder padding='20px' minHeight={`${adHeight}px`} />
+                {generateLineBreaks(15)}
+              </div>
+            ))}
           </Col>
+
+          {/* Products */}
           <Col md={10}>
-            {/* Products */}
             <Row>
               {products.map((product) => (
                 <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
@@ -51,22 +63,26 @@ function HomeScreen() {
               ))}
             </Row>
           </Col>
-          
+
+          {/* Right-side advertisement */}
           <Col md={1}>
-            {/* Right-side advertisement */}
-            <br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
-            <br/><br/><br/><br/><br/>
-            <AdPlaceholder /> 
+            <br />
+            {[1,2,3].map((_, index) => (
+              <div key={index}>
+                <AdPlaceholder padding='20px' minHeight={`${adHeight}px`} />
+                {generateLineBreaks(15)}
+              </div>
+            ))}
           </Col>
         </Row>
       )}
+      {/* Advertisement at the very bottom */}
+      <Row>
+        <Col md={12}>
+          {generateLineBreaks(5)}
+          <AdPlaceholder minHeight='70px' />
+        </Col>
+      </Row>
     </div>
   );
 }

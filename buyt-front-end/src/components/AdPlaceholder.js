@@ -1,17 +1,17 @@
 import React from 'react';
 
-function AdPlaceholder() {
+function AdPlaceholder({ padding, minHeight }) {
   const adStyle = {
     border: '1px solid #ccc',
     backgroundColor: '#f2f2f2',
-    padding: '20px',
-    minHeight: '300px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
     borderRadius: '8px',
+    padding: padding || '0', // Use the passed padding or default to '0'
+    minHeight: minHeight || 'auto', // Use the passed minHeight or default to 'auto'
   };
 
   const adTextStyle = {
@@ -21,8 +21,7 @@ function AdPlaceholder() {
 
   return (
     <div style={adStyle} className="ad-column">
-      <p style={adTextStyle}>ad</p>
-      {/* Add your ad content here */}
+      <p style={adTextStyle}>Your ad</p>
     </div>
   );
 }

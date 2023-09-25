@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
-import { Link, Link as Linjo, useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { Link, Link as Linjo, useNavigate } from 'react-router-dom';
 
 function Product({ product }) {
   const [qty, setQty] = useState(1);
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   const incrementQty = () => {
     if (qty < product.countInStock) {
@@ -20,16 +20,16 @@ function Product({ product }) {
   };
 
   const addToCartHandler = () => {
-    navigate(`/cart/${product._id}?qty=${qty}`); // Use the navigate function to navigate to the cart
+    navigate(`/cart/${product._id}?qty=${qty}`);
   };
 
   return (
-    <Card className="my-3 p-3 rounded">
+    <Card className="my-3 p-3 rounded product-card">
       <Linjo to={`/product/${product._id}`}>
-        <Card.Img src={product.image} />
+        <Card.Img src={product.image} className='product-image' />
       </Linjo>
 
-      <Card.Body>
+      <Card.Body className='product-details'>
         <Link to={`/product/${product._id}`}>
           <Card.Title as="div">
             <strong>{product.name}</strong>
@@ -48,7 +48,7 @@ function Product({ product }) {
               <div className='quantity-bubble'>
                 <button
                   type='button'
-                  className='quantity-button'
+                  className='quantity-button product-quantity-button'
                   onClick={decrementQty}
                 >
                   -
@@ -56,7 +56,7 @@ function Product({ product }) {
                 <span className='quantity-value'>{qty}</span>
                 <button
                   type='button'
-                  className='quantity-button'
+                  className='quantity-button product-quantity-button'
                   onClick={incrementQty}
                 >
                   +
