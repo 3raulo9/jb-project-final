@@ -61,11 +61,11 @@ def addOrderItems(request):
 
 @api_view(['GET'])
 @permission_classes([])
-def getOrderById(request, pk):
+def getOrderById(request, primarykey):
 
     user = request.user
     try:
-        order = Order.objects.get(_id=pk)
+        order = Order.objects.get(_id=primarykey)
         if user.is_staff or order.user == user:
             serializer = OrderSerializer(order, many=False)
             return Response(serializer.data)
@@ -87,8 +87,8 @@ def getMyOrders(request):
 
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
-def updateOrderToPaid(request, pk):
-    order = Order.objects.get(_id=pk)
+def updateOrderToPaid(request, primarykey):
+    order = Order.objects.get(_id=primarykey)
     
     order.isPaid = True
 
