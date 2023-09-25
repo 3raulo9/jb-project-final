@@ -37,7 +37,7 @@ function App() {
             <Route path='/cart/:id?' element={<CartScreen />} />
           </Routes>
         </Container>
-      </main>
+      </main >
       <Footer />
     </Router>
   );

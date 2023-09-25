@@ -1,14 +1,12 @@
-import React, { useInsertionEffect,  } from 'react'
-import { useDispatch,useSelector } from 'react-redux';
-import { LinkContainer } from 'react-router-bootstrap'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import React, { useDispatch, useSelector } from 'react-redux';
+import { LinkContainer } from 'react-router-bootstrap';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { logout } from '../actions/userActions';
 import { USER_LOGOUT } from '../constants/userConstants';
-
+import RandomPhrase from './RandomPhrase'; 
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -16,51 +14,53 @@ function Header() {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
-      dispatch(logout()); // Use the logout action creator
+    dispatch(logout());
   };
 
   return (
-    <header>
+    <header style={{ fontSize: '1.5em'  }}>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>buyT</Navbar.Brand>
+        <LinkContainer to="/" style={{ marginRight: '40px' }}>
+            <Navbar.Brand>
+              <span style={{ color: '#71797E', fontSize: '2.5em', fontFamily: 'Comic Sans MS, cursive, sans-serif', fontWeight: 'bold' }}>buy</span>
+              <span style={{ color: '#007bff', fontSize: '2.5em', fontFamily: 'Comic Sans MS, cursive, sans-serif', fontWeight: 'bold' }}>T</span>
+            </Navbar.Brand>
           </LinkContainer>
+          <Nav  style={{ marginRight: '460px', marginTop: '20px'}}><RandomPhrase /></Nav>
+           
 
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              {/* Cart */}
-              <LinkContainer to="/cart">
-                <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i> cart
-                </Nav.Link>
-              </LinkContainer>
+          <div style={{ marginLeft: 'auto' }}>
 
-              {userInfo ?(
-                <NavDropdown title={userInfo.name} id='username'>
-                  <LinkContainer to="/profile">
-                    <NavDropdown.Item>Profile</NavDropdown.Item>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                {/* Cart */}
+                <LinkContainer to="/cart">
+                  <Nav.Link>
+                    <i className="fas fa-shopping-cart"></i> cart
+                  </Nav.Link>
+                </LinkContainer>
+
+                {userInfo ? (
+                  <NavDropdown title={userInfo.name} id='username'>
+                    <LinkContainer to="/profile">
+                      <NavDropdown.Item>Profile</NavDropdown.Item>
+                    </LinkContainer>
+
+                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <LinkContainer to="/login">
+                    <Nav.Link>
+                      <i className="fa fa-user"></i> login
+                    </Nav.Link>
                   </LinkContainer>
+                )}
+              </Nav>
+            </Navbar.Collapse>
+          </div>
 
-                  <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
-
-
-                </NavDropdown>
-              ):(            
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <i className="fa fa-user"></i> login
-                </Nav.Link>
-              </LinkContainer>
-                
-
-              )
-              }
-
-
-            </Nav>
-          </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>

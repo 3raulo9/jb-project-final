@@ -85,7 +85,7 @@ function CartScreen() {
                       variant='light'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      <i className='fas fa-trash'></i>
+                      <i className='fas fa-trash'></i> 
                     </Button>
                   </Col>
                 </Row>
@@ -120,7 +120,6 @@ function CartScreen() {
             <Button
               type='button'
               className='btn-block'
-              disabled={cartItems.length === 0}
               onClick={checkoutHandler}
             >
               Proceed To Checkout
