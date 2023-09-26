@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link and useNavigate
 import { Table, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import { listUsers, deleteUser } from '../actions/userActions';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { listUsers } from '../actions/userActions';
-// deleteUser
 function UserListScreen() {
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Initialize the navigate function
 
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
@@ -16,23 +16,23 @@ function UserListScreen() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-//   const userDelete = useSelector((state) => state.userDelete);
-//   const { success: successDelete } = userDelete;
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers());
     } else {
-      // Handle navigation to the login page when the user is not an admin
-      window.location.href = '/login'; // You can replace this with your desired navigation logic
+      // Use the navigate function for navigation
+      navigate('/login');
     }
-  }, [dispatch, userInfo]);
-//   successDelete
-//   const deleteHandler = (id) => {
-//     if (window.confirm('Are you sure you want to delete this user?')) {
-//       dispatch(deleteUser(id));
-//     }
-//   };
+  }, [dispatch, successDelete, userInfo, navigate]);
+
+  const deleteHandler = (id) => {
+    if (window.confirm('Are you sure you want to delete this user?')) {
+      dispatch(deleteUser(id));
+    }
+  };
 
   return (
     <div>
@@ -77,6 +77,7 @@ function UserListScreen() {
                   <Button
                     variant='danger'
                     className='btn-sm'
+                    onClick={() => deleteHandler(user._id)}
                   >
                     <i className='fas fa-trash'></i>
                   </Button>
