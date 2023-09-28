@@ -42,18 +42,7 @@ function HomeScreen() {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          {/* Left-side advertisement */}
-          <Col md={1}>
-            <br />
-            {[1,2,3].map((_, index) => (
-              <div key={index}>
-                <AdPlaceholder padding='20px' minHeight={`${adHeight}px`} />
-                {generateLineBreaks(15)}
-              </div>
-            ))}
-          </Col>
-
-          {/* Products */}
+          
           <Col md={10}>
             <Row>
               {products.map((product) => (
@@ -64,25 +53,9 @@ function HomeScreen() {
             </Row>
           </Col>
 
-          {/* Right-side advertisement */}
-          <Col md={1}>
-            <br />
-            {[1,2,3].map((_, index) => (
-              <div key={index}>
-                <AdPlaceholder padding='20px' minHeight={`${adHeight}px`} />
-                {generateLineBreaks(15)}
-              </div>
-            ))}
-          </Col>
         </Row>
       )}
-      {/* Advertisement at the very bottom */}
-      <Row>
-        <Col md={12}>
-          {generateLineBreaks(5)}
-          <AdPlaceholder minHeight='70px' />
-        </Col>
-      </Row>
+
     </div>
   );
 }
