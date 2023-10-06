@@ -190,7 +190,6 @@ export const createProduct = () => async (dispatch, getState) => {
             payload: data,
         })
 
-
     } catch (error) {
         dispatch({
             type: PRODUCT_CREATE_FAIL,
