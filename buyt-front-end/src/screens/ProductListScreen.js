@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
-import { listProducts, deleteProduct } from '../actions/productActions';
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
 
 function ProductListScreen() {
   const dispatch = useDispatch();
@@ -38,8 +38,9 @@ function ProductListScreen() {
   };
 
   const createProductHandler = () => {
-    dispatch(console());
-  };
+    dispatch(createProduct())
+}
+
 
   return (
     <div>

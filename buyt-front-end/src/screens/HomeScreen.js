@@ -19,19 +19,6 @@ function HomeScreen() {
     dispatch(listProducts());
   }, [dispatch]);
 
-  // Calculate the number of advertisements based on available screen height
-  const screenHeight = window.innerHeight;
-  const adHeight = 300; // Height of each advertisement
-  const numAds = Math.floor((screenHeight - 70) / (adHeight + 30)); // Consider bottom ad and spacing
-
-  // Helper function to generate multiple line breaks
-  const generateLineBreaks = (count) => {
-    const lineBreaks = [];
-    for (let i = 0; i < count; i++) {
-      lineBreaks.push(<br key={i} />);
-    }
-    return lineBreaks;
-  };
 
   return (
     <div>
@@ -42,16 +29,15 @@ function HomeScreen() {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          
-          <Col md={10}>
+
             <Row>
-              {products.map((product) => (
-                <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                  <Product product={product} />
-                </Col>
+            {products.map(product => (
+                      <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                          <Product product={product} />
+                      </Col>
               ))}
             </Row>
-          </Col>
+
 
         </Row>
       )}

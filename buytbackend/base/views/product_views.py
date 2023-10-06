@@ -37,14 +37,30 @@ def getProduct(request, primarykey):
 def createProduct(request):
     user = request.user
     product = Product.objects.create(
-        user=user,
-        name='Sample Name',
-        price=0,
-        brand='Sample Brand',
-        countInStock=0,
-        category='Sample Category',
-        description=''
+        user = user,
+        name = 'NAME',
+        price = 0,
+        brand = 'BRAND',
+        countInStock = 0,
+        category = 'Sample Category',
+        description = ''
     )
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateProduct(request, primarykey):
+    data = request.data
+    product = Product.objects.get(_id=primarykey)
+    product.name = data['name']
+    product.price = data['price']
+    product.brand = data['brand']
+    product.countInStock = data['countInStock']
+    product.category = data['category']
+    product.description = data['description']
+    product.save()
+
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
