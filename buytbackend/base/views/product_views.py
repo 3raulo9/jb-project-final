@@ -42,7 +42,7 @@ def createProduct(request):
         price = 0,
         brand = 'BRAND',
         countInStock = 0,
-        category = 'Sample Category',
+        category = 'CATEGORY',
         description = ''
     )
     serializer = ProductSerializer(product, many=False)
@@ -70,5 +70,3 @@ def deleteProduct(request, primarykey):
     product = Product.objects.get(_id=primarykey)
     product.delete()
     return Response("Product Deleted")
-
-

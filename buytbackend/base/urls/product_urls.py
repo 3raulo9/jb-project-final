@@ -5,7 +5,7 @@ from base.views import product_views as views
 
 urlpatterns = [
     path('', views.getProducts, name="products"),
-        path('create/', views.createProduct, name="product-create"),
+    path('create/', views.createProduct, name="product-create"),
 
     path('<str:primarykey>/', views.getProduct, name="product"),
 
