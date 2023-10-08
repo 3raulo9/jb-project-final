@@ -7,6 +7,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { logout } from '../actions/userActions';
 import { USER_LOGOUT } from '../constants/userConstants';
 import RandomPhrase from './RandomPhrase'; 
+import SearchBox from './SearchBox'
 
 function Header() {
   const userLogin = useSelector((state) => state.userLogin);
@@ -34,6 +35,8 @@ function Header() {
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
+            <SearchBox />
+
               <Nav className="mr-auto">
                 {/* Cart */}
                 <LinkContainer to="/cart">
