@@ -103,3 +103,15 @@ def updateOrderToPaid(request, primarykey):
     order.save()
 
     return Response('The order was saved')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateOrderToDelivered(request, primarykey):
+    order = Order.objects.get(_id=primarykey)
+
+    order.isDelivered = True
+    order.deliveredAt = datetime.now()
+    order.save()
+
+    return Response('The order was delivered')
