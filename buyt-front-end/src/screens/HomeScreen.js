@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+import Paginate from '../components/Paginate';
 import { listProducts } from '../actions/productActions';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ function HomeScreen() {
     return (
         <div>
 
-            <h1>Latest Products</h1>
+            <h1>Upcoming hits!</h1>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -37,6 +38,7 @@ function HomeScreen() {
                             </Col>
                         ))}
                     </Row>
+                    <Paginate page={page} pages={pages} keyword={keyword} />
                 </div>
             )}
         </div>

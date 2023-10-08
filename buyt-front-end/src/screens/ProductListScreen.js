@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions';
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import Paginate from '../components/Paginate';
 
 function ProductListScreen() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function ProductListScreen() {
 
   // Use the navigate function for navigation
   const navigate = useNavigate();
+  let keyword = window.location.search;
 
   useEffect(() => {
     dispatch({ type: PRODUCT_CREATE_RESET });
@@ -33,10 +35,10 @@ function ProductListScreen() {
     }        if (successCreate) {
         navigate(`/admin/product/${createdProduct._id}/edit`); // Use navigate for navigation
     }else {
-      dispatch(listProducts());
+      dispatch(listProducts(keyword));
   }
 
-  }, [dispatch, userInfo, successDelete, successCreate, createProduct]);
+  }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct, keyword]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
@@ -114,6 +116,7 @@ function ProductListScreen() {
               </tr>
             ))}
           </tbody>
+          <Paginate pages={pages} page={page} isAdmin={true}/>
         </Table>
       )}
     </div>
