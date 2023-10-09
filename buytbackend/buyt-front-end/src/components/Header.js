@@ -37,7 +37,7 @@ function Header() {
             <Navbar.Collapse id="basic-navbar-nav">
             <SearchBox />
 
-              <Nav className="mr-auto">
+              <Nav className="ml-auto">
                 {/* Cart */}
                 <LinkContainer to="/cart">
                   <Nav.Link>
