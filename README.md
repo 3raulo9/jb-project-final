@@ -1,1 +1,1 @@
-# jb-project-final-backend
+# FINAL PROJECT FOR JOHN BRICE, AN E-SHOP
